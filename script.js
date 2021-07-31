@@ -11,13 +11,27 @@ function geraCartas(numeroCartas){
 
     let cartasNoJogo = [];
 
+    for(let i=0; i < numeroCartas/2; i++){
+        cartasNoJogo.push(todasCartas[i]);
+    }
+
+    for(let i=0; i < numeroCartas/2; i++){
+        cartasNoJogo.push(todasCartas[i]);
+    }
+
+    console.log(cartasNoJogo);
+
+    cartasNoJogo.sort(comparador);
+
+    console.log(cartasNoJogo);
+
     for(let i=0; i < numeroCartas; i++){
         main.innerHTML += `  <div class="carta">
                                 <div class="frente-carta">
                                     <img src="assets/front.png">
                                 </div>
                                 <div class="verso-carta">
-                                    <img src="assets/bobrossparrot.gif">
+                                    <img src="${cartasNoJogo[i]}">
                                 </div>
                             </div>`
     }

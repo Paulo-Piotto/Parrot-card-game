@@ -37,9 +37,9 @@ img{
 }
 
 .verso-carta{
-    display: none;
+    display: flex;
 }
 
 .frente-carta{
-    display: flex;
+    display: none;
 }
