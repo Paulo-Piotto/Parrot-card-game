@@ -35,3 +35,11 @@ main{
 img{
     height: 100px;
 }
+
+.verso-carta{
+    display: none;
+}
+
+.frente-carta{
+    display: flex;
+}
