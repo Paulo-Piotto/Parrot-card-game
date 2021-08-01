@@ -3,11 +3,13 @@ let todasCartas = ["assets/bobrossparrot.gif", "assets/explodyparrot.gif", "asse
 let cartasNoJogo = [];
 
 let numeroCartas = 0;
+let fimDoJogo = 0;
 
 let carta1;
 let carta2;
 
 let jogada = 1;
+let jogadas = 0;
 
 function comparador() { 
 	return Math.random() - 0.5; 
@@ -50,6 +52,10 @@ while(numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 !== 0){
 
 geraCartas(numeroCartas);
 
+function acabarJogo(jogadas){
+    alert(`Você ganhou em ${jogadas} jogadas!`)
+}
+
 function jogar(carta){
     let verso = carta.querySelector(".verso-carta");
     let frente = carta.querySelector(".frente-carta");
@@ -58,11 +64,13 @@ function jogar(carta){
         frente.classList.add("some");
         verso.classList.remove("some");
         jogada++;
+        jogadas++;
         carta1 = carta.querySelector(".gif");
     }else if(jogada === 2){
         frente.classList.add("some");
         verso.classList.remove("some");
         jogada--;
+        jogadas++;
         carta2 = carta.querySelector(".gif");
 
         if(carta1.src !== carta2.src){
@@ -78,10 +86,17 @@ function jogar(carta){
                 frente1.classList.remove("some");
                 frente2.classList.remove("some");
             }, 1000);
-           
-
+        }else{
+            fimDoJogo++;
         }
     }
+
+    if(fimDoJogo === numeroCartas/2){
+        setTimeout(acabarJogo, 100, jogadas);
+    }
+
+    console.log("jogadas = " + jogadas);
+    console.log("fim do jogo = " + fimDoJogo);
 
 
 }

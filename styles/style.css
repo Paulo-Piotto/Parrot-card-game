@@ -11,6 +11,7 @@ h1{
     font-weight: 700;
     color: #75B79E;
     font-size: 56px;
+    text-align: center;
 }
 
 main{
@@ -33,13 +34,26 @@ main{
 }
 
 img{
-    height: 100px;
+    width: 100px;
 }
+
 
 .some{
     display: none;
 }
 
-.aparece{
-    display: flex;
+
+@media(max-width: 600px) {
+    h1{
+        font-size: 36px;
+    }
+
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carta{
+        margin-right: 0;
+    }
 }
