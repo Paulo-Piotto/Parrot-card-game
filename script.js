@@ -1,49 +1,87 @@
-let todasCartas = ["assets/bobrossparrot.gif", "assets/explodyparrot.gif", "assets/fiestaparrot.gif", "assets/metalparrot.gif", "assets/revertitparrot.gif", "assets/tripletsparrot.gif", "assets/unicornparrot.gif"]
+let todasCartas = ["assets/bobrossparrot.gif", "assets/explodyparrot.gif", "assets/fiestaparrot.gif", "assets/metalparrot.gif", "assets/revertitparrot.gif", "assets/tripletsparrot.gif", "assets/unicornparrot.gif"];
+
+let cartasNoJogo = [];
+
+let numeroCartas = 0;
+
+let carta1;
+let carta2;
+
+let jogada = 1;
 
 function comparador() { 
 	return Math.random() - 0.5; 
+}
+
+function embaralhar(){
+    for(let i=0; i < numeroCartas/2; i++){
+        cartasNoJogo.push(todasCartas[i]);
+    }
+
+    for(let i=0; i < numeroCartas/2; i++){
+        cartasNoJogo.push(todasCartas[i]);
+    }
+
+    cartasNoJogo.sort(comparador);
 }
 
 
 
 function geraCartas(numeroCartas){
     let main = document.querySelector("main");
-
-    let cartasNoJogo = [];
-
-    for(let i=0; i < numeroCartas/2; i++){
-        cartasNoJogo.push(todasCartas[i]);
-    }
-
-    for(let i=0; i < numeroCartas/2; i++){
-        cartasNoJogo.push(todasCartas[i]);
-    }
-
-    console.log(cartasNoJogo);
-
-    cartasNoJogo.sort(comparador);
-
-    console.log(cartasNoJogo);
+    embaralhar();
 
     for(let i=0; i < numeroCartas; i++){
-        main.innerHTML += `  <div class="carta">
+        main.innerHTML += `  <div class="carta" onclick="jogar(this)">
                                 <div class="frente-carta">
                                     <img src="assets/front.png">
                                 </div>
-                                <div class="verso-carta">
-                                    <img src="${cartasNoJogo[i]}">
+                                <div class="verso-carta some">
+                                    <img class="gif" src="${cartasNoJogo[i]}">
                                 </div>
                             </div>`
     }
 }
 
 
-let numeroCartas = 0;
-
 while(numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 !== 0){
     numeroCartas = prompt("Escolha com quantas cartas quer jogar(4-14)");
-    console.log(numeroCartas);
 }
 
-
 geraCartas(numeroCartas);
+
+function jogar(carta){
+    let verso = carta.querySelector(".verso-carta");
+    let frente = carta.querySelector(".frente-carta");
+
+    if(jogada === 1){
+        frente.classList.add("some");
+        verso.classList.remove("some");
+        jogada++;
+        carta1 = carta.querySelector(".gif");
+    }else if(jogada === 2){
+        frente.classList.add("some");
+        verso.classList.remove("some");
+        jogada--;
+        carta2 = carta.querySelector(".gif");
+
+        if(carta1.src !== carta2.src){
+            let verso1 = carta1.parentNode;
+            let verso2 = carta2.parentNode;
+            let frente1 = carta1.parentNode.parentNode.querySelector(".frente-carta");
+            let frente2 = carta2.parentNode.parentNode.querySelector(".frente-carta");
+            
+
+            setTimeout(function(){
+                verso1.classList.add("some");
+                verso2.classList.add("some");
+                frente1.classList.remove("some");
+                frente2.classList.remove("some");
+            }, 1000);
+           
+
+        }
+    }
+
+
+}

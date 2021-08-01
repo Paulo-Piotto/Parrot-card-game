@@ -36,10 +36,10 @@ img{
     height: 100px;
 }
 
-.verso-carta{
-    display: flex;
+.some{
+    display: none;
 }
 
-.frente-carta{
-    display: none;
+.aparece{
+    display: flex;
 }
